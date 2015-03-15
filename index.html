@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="EN">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="robots" content="index, follow"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=.5, maximum-scale=2">
+        <meta name="description" content="GeoWeb">
+        <meta name="keywords" content="GeoWeb">
+        <meta name="author" content="Renan Pupin">
+        
+        <title>GeoWeb Final Assignment</title>
+
+        <!--STYLES-->
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" media="screen" href="http://openlayers.org/en/v3.1.1/css/ol.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+        <!--END OF STYLES-->
+
+    </head>
+
+    <body onload="init()">
+
+        <nav id="navbarMenu" class="navbar" role="navigation">
+          <div class="content">
+            <div class="navbarHeader">
+                <div id="brand">
+                    <a href="#">
+                        <img src="assets/img/earth.fw.png">
+                        <span class="app-name">GeoWEB</span>
+                    </a>
+                </div>
+            </div>
+            <ul id="menu" role="menu">
+                  <li><a href="#" id="#map-menu">Map</a></li>
+                  <li><a href="#" id="#application-menu">Application</a></li>
+                  <li><a href="#" id="#author-menu">Author</a></li>
+              </ul>
+          </div>
+          <!-- <div class="container">
+              <div class="navbarHeader">
+                  <div id="brand"><a href="#"><img src="assets/img/earth.fw.png"></a></div>
+              </div>
+              <ul role="menu">
+                  <li><a href="#" id="#map">Map</a></li>
+                  <li><a href="#" id="#application">Application</a></li>
+                  <li><a href="#" id="#author">Author</a></li>
+              </ul>
+          </div> -->
+      </nav>
+
+      <section id="map-content">
+            <div id="map" class="map" style="">
+              
+              <div id="legend" style="/*width: 250px; height: 200px;*/">
+                <div class="legend-content">
+                    <span class="legend-title" style="border-bottom: 1px solid #e7e7e7;">People by capital</span><br>
+                    <img style="margin-top: 1px;" src="http://www.geoservicos.ibge.gov.br/geoserver/CGEO/wms?request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=CGEO:C02_capitais_por_populacao_2010">
+                </div>
+                
+                <br>
+                <br>
+                
+                <div class="legend-content">
+                    <span class="legend-title" style="border-bottom: 1px solid #e7e7e7;">Immigrants</span><br>
+                    <img style="margin-top: 1px;" src="http://www.geoservicos.ibge.gov.br/geoserver/CGEO/wms?request=GetLegendGraphic&format=image%2Fpng&width=85&height=20&layer=CGEO:C05_imigrantes_estrangeiro_2010"><br>
+                    <img src="http://localhost:8080/geoserver/renan/wms?request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=CGEO:alunospordistrito2010"><br>
+                </div>
+              </div>
+
+              <div class="layer-switcher hidden">
+
+                  <div id="layer-switcher-toggle">
+                    <a href="javascript:void(0);">Show Layer Switcher</a>
+                  </div>
+
+                  <div id="controls">
+                      <h2>Layers</h2>
+                      
+                      <div class="controls-content">
+                          <input id="1" value="osmlayer" type="checkbox" onchange="layerVis(this.value)" checked/>
+                          MapQuest-OpenStreetMap<br>
+                          <input id="2" value="capitaisPopulacaoLayer" type="checkbox" onchange="layerVis(this.value)" checked/>
+                          Capital by population<br>
+                          <input id="3" value="imigrantesEstrangeirosLayer" type="checkbox" onchange="layerVis(this.value)" checked/>
+                          Foreign immigrants in 2010<br>
+                          <input id="4" value="aeroportosLayer" type="checkbox" onchange="layerVis(this.value)" checked/>
+                          Main airports in Brazil<br>
+                          <!-- <div id="info3">&nbsp;</div> -->
+                      </div>
+                  </div>
+
+                </div>
+                <div id="feature-info">
+                    <div class="feature-info-menu">
+                        <a id="close-feature-info" href="javascript:void(0);" title="Close">
+                            <div id="close1" class="close"></div>
+                            <div id="close2" class="close"></div>
+                        </a>
+                    </div>
+                    <div class="feature-info-content">
+                        <div id="info">&nbsp;</div>
+                        <div id="info2">&nbsp;</div>
+                    </div>
+                </div>
+                <div id="popup">
+                    <a href="javascript:void(0);" id="popup-closer"></a>
+                    <div id="popup-content">
+                        content here
+                        content here
+                    </div>
+                </div>
+            </div>
+
+      </section>
+
+
+        <section id="application">
+          <div class="section-title">
+            <span><img src="assets/img/map.fw.png"></span>Application
+          </div>
+          
+          <div class="section-subtitle">
+            Some informations about this application
+          </div>
+
+          <div class="section-content">
+              <div class="container">
+                <h2>1. The Application</h2>
+                <p>This application follows the practices learned during the Geoweb Application Development discipline. Here were used technologies involving GeoServer, PostGIS, QGIS, OpenLayers and web languages (HTML, CSS, JS).</p>
+
+                <h2>2. The content</h2>
+                <p>The content used in the application comes from IGBE servers except the layer "Airports". This layer contains the main national airports and it was created by using the QGIS software and then exported to PostGIS. Next we defined the workspace, the store and the layer. So the plotted data have become part of a service that provides the visualization of data to users.</p>
+
+                <div class="subsection">
+                  <h3>2.1. Layer Airports</h3>
+                  <p>The layers named "Airports" was created manually in QGIS and it represents the main airports in Brazil.</p>
+
+                  <h3>2.2. Layer Capitals by population</h3>
+                  <p>The layers named "C02_capitais_por_populacao_2010" comes from IGBE services data and it provides the population of each capital in Brazil in the year of 2010.</p>
+
+                  <h3>2.3. Layer Stranger Imigrants</h3>
+                  <p>The layers named "C05_imigrantes_estrangeiro_2010" comes from IGBE services data and it provides the number of immigrant strangers in Brazil in the year of 2010.</p>
+                  </div>
+              </div>
+          </div>
+
+        </section>
+
+
+
+
+
+
+        <section id="feature-geoserver">
+            <div class="menu-content parallax">
+                <div class="pattern-overlay">
+                    <div class="container">
+                            <div class="row">
+                                <div class="feature-geoserver-content">
+                                    <div class="feature-geoserver-title">
+                                        <h1>Web services...</h1>
+                                        <img src="assets/img/compass.fw.png">
+                                    </div>
+                                    <div class="feature-geoserver-text">
+                                    <p>Web service is a solution used in systems integration and communication between different applications. With this technology it is possible that new applications can interact with those that already exist and that systems developed on different platforms are compatible. Web services are components that allow applications to send and receive data in XML format.</p>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+        <section id="author">
+          <div class="section-title">
+            <span><img src="assets/img/window.fw.png"></span>Author
+          </div>
+          
+          <div class="section-subtitle">
+            Some details about me
+          </div>
+
+          <div class="section-content">
+              <div class="container">
+                <div class="row">
+                    <div class="grid-half perfil">
+                        <img src="assets/img/perfil.png">
+                    </div>
+
+                    <div class="grid-half">
+                        <h2>About me</h2>
+                        <p>My name is Renan Augusto de Oliveira Pupin, I am computer science student at FCT-UNESP in Presidente Prudente. I am an enthusiast in technology and in my free time I like to study about IT (Information Technology) and develop websites. I knew a little about geoservices, QGIS, OpenLayers and Map Applications when I started doing a trainee in the area, the knowledge that I got was extremely important and very exciting. Feel free to send me an <a href="mailto:renan.pupin@gmail.com" title="renan.pupin@gmail.com">email</a> about things related to technology and development.</p>
+                    </div>
+                </div>
+              </div>
+          </div>
+
+        </section>
+
+        <footer>
+            Discipline "Projeto de aplicações GeoWeb"
+            <span class="author">Developed by <a href="http://www.renanpupin.com" target="_blank">Renan Pupin</a></span>
+        </footer>
+
+
+       <!--SCRIPTS-->
+       <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/proj4js/2.2.1/proj4.js"></script>
+       <script type="text/javascript" src="http://epsg.io/4674.js"></script>
+       <script type="text/javascript" src="http://openlayers.org/en/v3.1.1/build/ol.js"></script>
+       <script type="text/javascript" src="assets/js/jquery.js"></script>
+       <script type="text/javascript" src="assets/js/script.js"></script>
+       <!--END OF SCRIPTS-->
+       
+    </body>
+</html>
